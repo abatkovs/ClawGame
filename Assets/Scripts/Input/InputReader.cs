@@ -10,6 +10,7 @@ namespace Scripts.Input
     
         [SerializeField] private Camera mainCam;
         public Vector2 MovementValue { get; private set; }
+        public Vector2 LookValue { get; private set; }
         public Vector2 JoystickAim { get; private set; }
         public Vector2 MousePosition { get; private set; }
     
@@ -43,6 +44,11 @@ namespace Scripts.Input
         public void OnMove(InputAction.CallbackContext context)
         {
             MovementValue = context.ReadValue<Vector2>();
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {
+            LookValue = context.ReadValue<Vector2>();
         }
 
         public void OnInteract(InputAction.CallbackContext context)

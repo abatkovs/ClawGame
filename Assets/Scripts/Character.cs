@@ -26,11 +26,6 @@ public class Character : MonoBehaviour
         if (_characterController == null) _characterController = GetComponent<CharacterController>();
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         SetVelocity(_input.MovementValue);
