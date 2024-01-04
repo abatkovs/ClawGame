@@ -28,13 +28,14 @@ public class Character : MonoBehaviour
 
     private void Update()
     {
-        SetVelocity(_input.MovementValue);
+        
     }
 
     private void FixedUpdate()
     {
+        SetVelocity(_input.MovementValue);
         CalculateMovement();
-            
+        
         if (!_characterController.isGrounded) 
             _verticalVelocity = gravity;
         else
