@@ -1,5 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement style="flex-grow: 1; align-items: center; font-size: 26px; color: rgb(255, 255, 255); -unity-text-outline-width: 1px; -unity-text-outline-color: rgb(0, 0, 0);">
-        <ui:Label text="PLACEHOLDER" style="-unity-font-style: bold;" />
+    <Style src="project://database/Assets/Scripts/UI/DefaultStyleSheet.uss?fileID=7433441132597879392&amp;guid=abd04cd6a20631c408bf0a6b6757ba85&amp;type=3#DefaultStyleSheet" />
+    <ui:VisualElement>
+        <ui:Label text="PLACEHOLDER" />
+        <ui:Button text="PLACEHOLDER" />
     </ui:VisualElement>
 </ui:UXML>

@@ -1,9 +1,12 @@
-using System;
 using Scripts.Input;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+//TODO: use rigidBody instead of CharacterController
+public class Character : NetworkBehaviour
 {
+    
+    [SerializeField] private InputReader inputReader;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private Vector3 movementVelocity;
@@ -13,22 +16,22 @@ public class Character : MonoBehaviour
 
     private Camera _mainCam;
 
-    private InputReader _input;
+    
     
     private void Awake()
     {
         _mainCam = Camera.main;
     }
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
-        _input = InputReader.Instance;
         if (_characterController == null) _characterController = GetComponent<CharacterController>();
     }
 
     private void FixedUpdate()
     {
-        SetVelocity(_input.MovementValue);
+        if(!IsOwner) return;
+        SetVelocity(inputReader.MovementValue);
         CalculateMovement();
         
         if (!_characterController.isGrounded) 
