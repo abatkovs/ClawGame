@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aim",
-                    "type": "PassThrough",
-                    "id": "f9432595-d456-4be8-ad63-4628d6346bc8",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "MousePosition",
                     "type": "Value",
                     "id": "7ff28a09-308e-4d07-bb9c-5b66b096b37f",
@@ -72,6 +63,33 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "93d3a6b9-1d81-4444-947f-8375b8d6f818",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action1",
+                    "type": "Button",
+                    "id": "d4fe44df-f380-4cf9-aa9f-40133dbd2cc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action2",
+                    "type": "Button",
+                    "id": "82c5bb0d-2920-452d-b766-17bf2ebfa6b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Action3",
+                    "type": "Button",
+                    "id": "25f59597-d49e-4a2a-8113-a7d2f76d3f1f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -224,17 +242,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2e33cf10-3cf1-42a3-8c8a-161b0feffa13",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4f284f41-7ebf-4948-93c1-de4fe011c748",
                     "path": "<Mouse>/position",
                     "interactions": "",
@@ -329,6 +336,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b69dd18-97d5-4897-8a31-9090f3878729",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "65d95417-8131-4b11-a971-ae97b50b6324",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3f4c61c-0d69-4374-b4f3-ec3e73eea521",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Action3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 
 namespace Scripts.Input
 {
-    public class InputReader : MonoBehaviour, Controls.IPlayerActions
+    [CreateAssetMenu(fileName = "InputReader", menuName = "Data/Input/InputReader")]
+    public class InputReader : ScriptableObject, Controls.IPlayerActions
     {
         public static InputReader Instance;
-    
-        [SerializeField] private Camera mainCam;
+        
         public Vector2 MovementValue { get; private set; }
         public Vector2 LookValue { get; private set; }
         public Vector2 JoystickAim { get; private set; }
@@ -23,16 +23,21 @@ namespace Scripts.Input
         public event Action OnShootButtonReleased;
         public event Action OnDashButtonPress;
         public event Action OnPauseButtonPress;
+        public event Action OnAction1ButtonPress;
+        public event Action OnAction2ButtonPress;
+        public event Action OnAction3ButtonPress;
 
         private void Awake()
         {
             Instance = this;
         }
-
-        private void Start(){
-            _controls = new Controls();
-            _controls.Player.SetCallbacks(this); //bind input class to controls class
-
+        
+        private void OnEnable() {
+            if(_controls == null)
+            {
+                _controls = new Controls();
+                _controls.Player.SetCallbacks(this);
+            }
             _controls.Player.Enable();
         }
 
@@ -86,6 +91,24 @@ namespace Scripts.Input
         {
             if (!context.performed) return;
             OnPauseButtonPress?.Invoke();
+        }
+
+        public void OnAction1(InputAction.CallbackContext context)
+        {
+            if(!context.performed) return;
+            OnAction1ButtonPress?.Invoke();
+        }
+
+        public void OnAction2(InputAction.CallbackContext context)
+        {
+            if(!context.performed) return;
+            OnAction2ButtonPress?.Invoke();
+        }
+
+        public void OnAction3(InputAction.CallbackContext context)
+        {
+            if(!context.performed) return;
+            OnAction3ButtonPress?.Invoke();
         }
 
         public void MouseEntersUI()
