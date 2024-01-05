@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
@@ -30,15 +29,15 @@ public class ConnectionButtons : MonoBehaviour
         
         _root.styleSheets.Add(styleSheet);
 
-        var container = UI.Create("container");
+        var container = UIExt.Create("container");
         _root.Add(container);
         
-        var hostButton = UI.Create<Button>("host-button");
+        var hostButton = UIExt.Create<Button>("host-button");
         hostButton.text = "HOST";
         hostButton.clicked += HostServer;
         container.Add(hostButton);
 
-        var joinButton = UI.Create<Button>("join-button");
+        var joinButton = UIExt.Create<Button>("join-button");
         joinButton.text = "JOIN";
         joinButton.clicked += JoinGame;
         container.Add(joinButton);

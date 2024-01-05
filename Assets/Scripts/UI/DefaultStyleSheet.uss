@@ -28,3 +28,11 @@ VisualElement {
 .unity-button:hover {
     color: rgb(91, 91, 91);
 }
+
+.centered {
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-grow: 1;
+    flex-shrink: 0;
+}

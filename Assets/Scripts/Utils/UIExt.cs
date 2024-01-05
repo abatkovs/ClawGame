@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class UI : MonoBehaviour
+public class UIExt : MonoBehaviour
 {
     public static VisualElement Create(params string[] className)
     {

@@ -924,10 +924,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 5840ac42-1e5a-4bbd-abcd-5510283a53fe
+  cloudProjectId: d3d0dbe1-f85f-4947-9d79-a79aeab9dc15
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: ClawGame 2024-01-04_21-23-18
+  projectName: ClawGame
   organizationId: notdragons
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
