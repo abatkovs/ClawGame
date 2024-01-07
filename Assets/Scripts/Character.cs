@@ -1,3 +1,4 @@
+using System;
 using Scripts.Input;
 using Unity.Netcode;
 using UnityEngine;
@@ -17,18 +18,31 @@ public class Character : NetworkBehaviour
     private float _verticalVelocity;
 
     private Camera _mainCam;
-    
+    private GameManager _gameManager;
+
     private int _walkingAnimationHash = Animator.StringToHash("Walking");
     
     public override void OnNetworkSpawn()
     {
+        Debug.Log("Character spawned OnNetworkSpawn");
+        _gameManager = GameManager.Instance;
         if (_characterController == null) _characterController = GetComponent<CharacterController>();
         _mainCam = Camera.main;
+
+        if (IsServer)
+        {
+            _gameManager.AddCharacter(this);
+            transform.position = _gameManager.LevelSpawnPoints.GetRandomSpawnPoint();
+        }
+        
+        //CharacterController prevents setting player position rigid bodies do not have this problem
+        if(IsOwner) _characterController.enabled = true;
     }
 
     private void FixedUpdate()
     {
         if(!IsOwner) return;
+
         SetVelocity(inputReader.MovementValue);
         CalculateMovement();
         
@@ -49,11 +63,6 @@ public class Character : NetworkBehaviour
         else
             animator.SetBool(_walkingAnimationHash, false);
         movementVelocity.Set(velocity.x, 0, velocity.y);
-    }
-
-    public void SetCharacterController(CharacterController controller)
-    {
-        _characterController = controller;
     }
 
     private void CalculateMovement()

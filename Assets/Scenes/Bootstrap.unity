@@ -294,6 +294,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b99a2201fc2a2304c9ebfe39ef240348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <RoomName>k__BackingField: 
+  <Characters>k__BackingField: []
+  <LevelSpawnPoints>k__BackingField: {fileID: 11400000, guid: e05e5bc1a10a9894893ca381be6c732e,
+    type: 2}
 --- !u!4 &845459224
 Transform:
   m_ObjectHideFlags: 0

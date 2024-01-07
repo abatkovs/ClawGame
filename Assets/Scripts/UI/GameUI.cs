@@ -33,7 +33,7 @@ public class GameUI : MonoBehaviour
         _root.Add(container);
         
         var roomLabel = UIExt.Create<Label>("room-label");
-        roomLabel.text = $"ROOM: {GameManager.Instance.RoomName}";
+        if(Application.isPlaying) roomLabel.text = $"ROOM: {GameManager.Instance.RoomName}";
         container.Add(roomLabel);
         
         var coinLabel = UIExt.Create<Label>();
