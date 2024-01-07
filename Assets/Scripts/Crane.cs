@@ -21,6 +21,7 @@ public class Crane : NetworkBehaviour
     {
         //TODO: make it so that the crane can only move when the game has started and has a player to chase
         //Requires at least 3 players to start chasing
+        if(!IsServer) return;
         if(NetworkManager.Singleton.ConnectedClients.Count <= 2) return;
         if (selectedPlayerToChase == null)
         {
@@ -28,17 +29,13 @@ public class Crane : NetworkBehaviour
             return;
         }
 
-        if (IsServer)
-        {
-            var position = transform.position;
-            movementVelocity = selectedPlayerToChase.position - position;
-            movementVelocity.Normalize();
-            movementVelocity.y = 0;
-            movementVelocity *= speed * Time.deltaTime;
-            position += movementVelocity;
-            transform.position = position;
-        }
-        
+        var position = transform.position;
+        movementVelocity = selectedPlayerToChase.position - position;
+        movementVelocity.Normalize();
+        movementVelocity.y = 0;
+        movementVelocity *= speed * Time.deltaTime;
+        position += movementVelocity;
+        transform.position = position;
     }
 
     [ContextMenu("StartGameTest")]

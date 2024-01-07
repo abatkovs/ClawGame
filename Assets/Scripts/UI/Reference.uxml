@@ -4,4 +4,8 @@
         <ui:Label text="PLACEHOLDER" />
         <ui:Button text="PLACEHOLDER" />
     </ui:VisualElement>
+    <ui:VisualElement class="inline" style="flex-grow: 1; flex-direction: row;">
+        <ui:Button text="Button" />
+        <ui:Button text="Button" />
+    </ui:VisualElement>
 </ui:UXML>

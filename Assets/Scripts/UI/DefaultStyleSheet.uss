@@ -36,3 +36,7 @@ VisualElement {
     flex-grow: 1;
     flex-shrink: 0;
 }
+
+.inline {
+    flex-direction: row;
+}

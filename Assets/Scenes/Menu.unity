@@ -180,10 +180,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c50362127ad934cbaf0b92fc17a66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBootstrap: 0
   _document: {fileID: 1635525694}
   _styleSheet: {fileID: 7433441132597879392, guid: abd04cd6a20631c408bf0a6b6757ba85,
     type: 3}
+  mainMenuState: 1
 --- !u!1 &1952701600
 GameObject:
   m_ObjectHideFlags: 0
