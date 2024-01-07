@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class Crane : NetworkBehaviour
 {
-
+    
     [SerializeField] private Transform selectedPlayerToChase;
 
     [SerializeField] private Vector3 movementVelocity;
@@ -13,30 +13,33 @@ public class Crane : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        Debug.Log("Crane spawned");
-        GameStarted();
+        Debug.Log("Crane spawned OnNetworkSpawn");
+        
     }
 
     private void Update()
     {
         //TODO: make it so that the crane can only move when the game has started and has a player to chase
-        if(selectedPlayerToChase == null) return;
-        
-        if (IsServer)
+        //Requires at least 3 players to start chasing
+        if(!IsServer) return;
+        if(NetworkManager.Singleton.ConnectedClients.Count <= 2) return;
+        if (selectedPlayerToChase == null)
         {
-            var position = transform.position;
-            movementVelocity = selectedPlayerToChase.position - position;
-            movementVelocity.Normalize();
-            movementVelocity.y = 0;
-            movementVelocity *= speed * Time.deltaTime;
-            position += movementVelocity;
-            transform.position = position;
+            StartGame();
+            return;
         }
-        
+
+        var position = transform.position;
+        movementVelocity = selectedPlayerToChase.position - position;
+        movementVelocity.Normalize();
+        movementVelocity.y = 0;
+        movementVelocity *= speed * Time.deltaTime;
+        position += movementVelocity;
+        transform.position = position;
     }
 
     [ContextMenu("StartGameTest")]
-    private void GameStarted()
+    private void StartGame()
     {
         if (IsServer)
         {

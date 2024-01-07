@@ -1,8 +1,12 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Netcode;
 using Unity.Netcode.Transports.UTP;
 using Unity.Networking.Transport.Relay;
+using Unity.Services.Lobbies;
+using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
@@ -12,6 +16,7 @@ public class HostGameManager
 {
     private Allocation _allocation;
     private string _joinCode;
+    private string _lobbyId;
     
     private const int MaxConnections = 10;
     private const string GameSceneName = "Game";
@@ -45,8 +50,57 @@ public class HostGameManager
         RelayServerData relayServerData = new RelayServerData(_allocation, "udp");
         unityTransport.SetRelayServerData(relayServerData);
         
+        if (await CreateLobby()) return;
+        
         NetworkManager.Singleton.StartHost();
         
         NetworkManager.Singleton.SceneManager.LoadScene(GameSceneName, LoadSceneMode.Single);
+    }
+
+    private async Task<bool> CreateLobby()
+    {
+        try
+        {
+            CreateLobbyOptions lobbyOptions = new CreateLobbyOptions
+            {
+                IsPrivate = false,
+                //Set join code as lobby data
+                Data = new Dictionary<string, DataObject>()
+                {
+                    {
+                        "joinCode", new DataObject(visibility: DataObject.VisibilityOptions.Member, value: _joinCode)
+                    }
+                }
+            };
+
+            Lobby lobby = await Lobbies.Instance.CreateLobbyAsync($"{_joinCode}", MaxConnections, lobbyOptions);
+            _lobbyId = lobby.Id;
+            //Recomended heartbeat time is 15 seconds
+            //https://support.unity.com/hc/en-us/articles/4408402562580-Understanding-and-Implementing-Lobby-Heartbeats#
+            HostSingleton.Instance.StartCoroutine(LobbyHeartbeat(15f));
+        }
+        catch (LobbyServiceException lobbyException)
+        {
+            Debug.Log(lobbyException);
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /// <summary>
+    /// Send hearbeat to lobby service to keep lobby alive
+    /// </summary>
+    /// <param name="waitTimeSeconds"></param>
+    /// <returns></returns>
+    IEnumerator LobbyHeartbeat(float waitTimeSeconds)
+    {
+        WaitForSecondsRealtime delay = new WaitForSecondsRealtime(waitTimeSeconds);
+        while (true)
+        {
+            Lobbies.Instance.SendHeartbeatPingAsync(_lobbyId);
+            yield return delay;
+        }
     }
 }
